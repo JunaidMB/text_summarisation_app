@@ -27,10 +27,11 @@ RUN R -e "install.packages(c('tidyverse', 'tidytext', 'tokenizers', 'philentropy
 
 # copy the app to the image
 COPY app.R /root/app.R
+COPY helper_functions.R /root/helper_functions.R
 
 
 COPY Rprofile.site /usr/lib/R/etc/
 
 EXPOSE 3838
 
-CMD ["R", "-e", "library(tidyverse); library(tidytext); library(tokenizers); library(philentropy); library(shiny); library(glue); source('/root/helper_functions.R'); setwd('/root'); shiny::runApp('/root', host='0.0.0.0', port=3838)"]
+CMD ["R", "-e", "library(tidyverse); library(tidytext); library(tokenizers); library(philentropy); library(shiny); library(glue); source('/root/helper_functions.R'); shiny::runApp('/root', host='0.0.0.0', port=3838)"]
